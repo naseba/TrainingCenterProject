@@ -1,0 +1,17 @@
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\TrainingCenterProject.exe
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\TrainingCenterProject.exe.config
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\EntityFramework.dll
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\EntityFramework.SqlServer.dll
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\EntityFramework.xml
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\EntityFramework.SqlServer.xml
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.AdminForm.resources
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.Form1.resources
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.TraineeForm.resources
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.Properties.Resources.resources
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.csproj.GenerateResource.cache
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.csproj.CoreCompileInputs.cache
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.csproj.CopyComplete
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.exe
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.pdb
+C:\Users\Hp\source\TrainingCenterProject\bin\Debug\TrainingCenterProject.pdb
+C:\Users\Hp\source\TrainingCenterProject\obj\Debug\TrainingCenterProject.csprojAssemblyReference.cache

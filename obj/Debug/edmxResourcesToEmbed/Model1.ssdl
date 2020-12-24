@@ -1,0 +1,247 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrainingCenterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Certification_Courses">
+    <Key>
+      <PropertyRef Name="CertificationID" />
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CertificationID" Type="int" Nullable="false" />
+    <Property Name="CourseID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Certifications">
+    <Key>
+      <PropertyRef Name="CertificationID" />
+    </Key>
+    <Property Name="CertificationID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CertificationName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Provider" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Courses">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CourseName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Price" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Duration" Type="int" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="DeliveryMethod" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="TrainerID" Type="int" />
+  </EntityType>
+  <EntityType Name="Enrollments">
+    <Key>
+      <PropertyRef Name="CourseID" />
+      <PropertyRef Name="TraineeID" />
+    </Key>
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="TraineeID" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar" MaxLength="1" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="LoginID" />
+    </Key>
+    <Property Name="LoginID" Type="int" Nullable="false" />
+    <Property Name="Username" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Password" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Role" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="int" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="PhoneNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="BirthDate" Type="date" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Salary" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="Trainees">
+    <Key>
+      <PropertyRef Name="TraineeID" />
+    </Key>
+    <Property Name="TraineeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="PhoneNo" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Trainers">
+    <Key>
+      <PropertyRef Name="TrainerID" />
+    </Key>
+    <Property Name="TrainerID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="LastName" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Qualifications" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Gender" Type="nvarchar" MaxLength="1" Nullable="false" />
+    <Property Name="BirthDate" Type="date" Nullable="false" />
+    <Property Name="Address" Type="nvarchar(max)" Nullable="false" />
+    <Property Name="Salary" Type="decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Wishlist">
+    <Key>
+      <PropertyRef Name="CourseID" />
+      <PropertyRef Name="TraineeID" />
+    </Key>
+    <Property Name="CourseID" Type="int" Nullable="false" />
+    <Property Name="TraineeID" Type="int" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_Certification_Courses_Certifications">
+    <End Role="Certifications" Type="Self.Certifications" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Certification_Courses" Type="Self.Certification_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Certifications">
+        <PropertyRef Name="CertificationID" />
+      </Principal>
+      <Dependent Role="Certification_Courses">
+        <PropertyRef Name="CertificationID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Certification_Courses_Courses">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Certification_Courses" Type="Self.Certification_Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Certification_Courses">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Courses_Trainers">
+    <End Role="Trainers" Type="Self.Trainers" Multiplicity="0..1" />
+    <End Role="Courses" Type="Self.Courses" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trainers">
+        <PropertyRef Name="TrainerID" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="TrainerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollments_Courses">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Enrollments">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollments_Trainees">
+    <End Role="Trainees" Type="Self.Trainees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Enrollments" Type="Self.Enrollments" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trainees">
+        <PropertyRef Name="TraineeID" />
+      </Principal>
+      <Dependent Role="Enrollments">
+        <PropertyRef Name="TraineeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Wishlist_Courses">
+    <End Role="Courses" Type="Self.Courses" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Wishlist_Trainees">
+    <End Role="Trainees" Type="Self.Trainees" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Wishlist" Type="Self.Wishlist" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trainees">
+        <PropertyRef Name="TraineeID" />
+      </Principal>
+      <Dependent Role="Wishlist">
+        <PropertyRef Name="TraineeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="TrainingCenterModelStoreContainer">
+    <EntitySet Name="Certification_Courses" EntityType="Self.Certification_Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Certifications" EntityType="Self.Certifications" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Courses" EntityType="Self.Courses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Enrollments" EntityType="Self.Enrollments" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Login" EntityType="Self.Login" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Staff" EntityType="Self.Staff" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trainees" EntityType="Self.Trainees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Trainers" EntityType="Self.Trainers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Wishlist" EntityType="Self.Wishlist" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_Certification_Courses_Certifications" Association="Self.FK_Certification_Courses_Certifications">
+      <End Role="Certifications" EntitySet="Certifications" />
+      <End Role="Certification_Courses" EntitySet="Certification_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Certification_Courses_Courses" Association="Self.FK_Certification_Courses_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Certification_Courses" EntitySet="Certification_Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Courses_Trainers" Association="Self.FK_Courses_Trainers">
+      <End Role="Trainers" EntitySet="Trainers" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollments_Courses" Association="Self.FK_Enrollments_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Enrollments" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollments_Trainees" Association="Self.FK_Enrollments_Trainees">
+      <End Role="Trainees" EntitySet="Trainees" />
+      <End Role="Enrollments" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Wishlist_Courses" Association="Self.FK_Wishlist_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Wishlist" EntitySet="Wishlist" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Wishlist_Trainees" Association="Self.FK_Wishlist_Trainees">
+      <End Role="Trainees" EntitySet="Trainees" />
+      <End Role="Wishlist" EntitySet="Wishlist" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

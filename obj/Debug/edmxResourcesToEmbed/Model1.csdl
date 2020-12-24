@@ -1,0 +1,183 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="TrainingCenterModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Certification">
+    <Key>
+      <PropertyRef Name="CertificationID" />
+    </Key>
+    <Property Name="CertificationID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CertificationName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Provider" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Courses" Relationship="Self.Certification_Courses" FromRole="Certifications" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="Cours">
+    <Key>
+      <PropertyRef Name="CourseID" />
+    </Key>
+    <Property Name="CourseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="CourseName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Price" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <Property Name="Duration" Type="Int32" Nullable="false" />
+    <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="DeliveryMethod" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="TrainerID" Type="Int32" />
+    <NavigationProperty Name="Trainer" Relationship="Self.FK_Courses_Trainers" FromRole="Courses" ToRole="Trainers" />
+    <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollments_Courses" FromRole="Courses" ToRole="Enrollments" />
+    <NavigationProperty Name="Certifications" Relationship="Self.Certification_Courses" FromRole="Courses" ToRole="Certifications" />
+    <NavigationProperty Name="Trainees" Relationship="Self.Wishlist" FromRole="Courses" ToRole="Trainees" />
+  </EntityType>
+  <EntityType Name="Enrollment">
+    <Key>
+      <PropertyRef Name="CourseID" />
+      <PropertyRef Name="TraineeID" />
+    </Key>
+    <Property Name="CourseID" Type="Int32" Nullable="false" />
+    <Property Name="TraineeID" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="1" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Cours" Relationship="Self.FK_Enrollments_Courses" FromRole="Enrollments" ToRole="Courses" />
+    <NavigationProperty Name="Trainee" Relationship="Self.FK_Enrollments_Trainees" FromRole="Enrollments" ToRole="Trainees" />
+  </EntityType>
+  <EntityType Name="Login">
+    <Key>
+      <PropertyRef Name="LoginID" />
+    </Key>
+    <Property Name="LoginID" Type="Int32" Nullable="false" />
+    <Property Name="Username" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Role" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Staff">
+    <Key>
+      <PropertyRef Name="StaffID" />
+    </Key>
+    <Property Name="StaffID" Type="Int32" Nullable="false" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="Trainee">
+    <Key>
+      <PropertyRef Name="TraineeID" />
+    </Key>
+    <Property Name="TraineeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PhoneNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <NavigationProperty Name="Enrollments" Relationship="Self.FK_Enrollments_Trainees" FromRole="Trainees" ToRole="Enrollments" />
+    <NavigationProperty Name="Courses" Relationship="Self.Wishlist" FromRole="Trainees" ToRole="Courses" />
+  </EntityType>
+  <EntityType Name="Trainer">
+    <Key>
+      <PropertyRef Name="TrainerID" />
+    </Key>
+    <Property Name="TrainerID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FirstName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LastName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Qualifications" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Gender" Type="String" MaxLength="1" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="BirthDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Salary" Type="Decimal" Precision="18" Scale="0" Nullable="false" />
+    <NavigationProperty Name="Courses" Relationship="Self.FK_Courses_Trainers" FromRole="Trainers" ToRole="Courses" />
+  </EntityType>
+  <Association Name="FK_Courses_Trainers">
+    <End Role="Trainers" Type="Self.Trainer" Multiplicity="0..1" />
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trainers">
+        <PropertyRef Name="TrainerID" />
+      </Principal>
+      <Dependent Role="Courses">
+        <PropertyRef Name="TrainerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollments_Courses">
+    <End Role="Courses" Type="Self.Cours" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Enrollments" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Courses">
+        <PropertyRef Name="CourseID" />
+      </Principal>
+      <Dependent Role="Enrollments">
+        <PropertyRef Name="CourseID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_Enrollments_Trainees">
+    <End Role="Trainees" Type="Self.Trainee" Multiplicity="1">
+      <OnDelete Action="Cascade" />
+    </End>
+    <End Role="Enrollments" Type="Self.Enrollment" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Trainees">
+        <PropertyRef Name="TraineeID" />
+      </Principal>
+      <Dependent Role="Enrollments">
+        <PropertyRef Name="TraineeID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="Certification_Courses">
+    <End Role="Certifications" Type="Self.Certification" Multiplicity="*" />
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+  </Association>
+  <Association Name="Wishlist">
+    <End Role="Courses" Type="Self.Cours" Multiplicity="*" />
+    <End Role="Trainees" Type="Self.Trainee" Multiplicity="*" />
+  </Association>
+  <EntityContainer Name="TrainingCenterEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Certifications" EntityType="Self.Certification" />
+    <EntitySet Name="Courses" EntityType="Self.Cours" />
+    <EntitySet Name="Enrollments" EntityType="Self.Enrollment" />
+    <EntitySet Name="Logins" EntityType="Self.Login" />
+    <EntitySet Name="Staffs" EntityType="Self.Staff" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagram" />
+    <EntitySet Name="Trainees" EntityType="Self.Trainee" />
+    <EntitySet Name="Trainers" EntityType="Self.Trainer" />
+    <AssociationSet Name="FK_Courses_Trainers" Association="Self.FK_Courses_Trainers">
+      <End Role="Trainers" EntitySet="Trainers" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollments_Courses" Association="Self.FK_Enrollments_Courses">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Enrollments" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="FK_Enrollments_Trainees" Association="Self.FK_Enrollments_Trainees">
+      <End Role="Trainees" EntitySet="Trainees" />
+      <End Role="Enrollments" EntitySet="Enrollments" />
+    </AssociationSet>
+    <AssociationSet Name="Certification_Courses" Association="Self.Certification_Courses">
+      <End Role="Certifications" EntitySet="Certifications" />
+      <End Role="Courses" EntitySet="Courses" />
+    </AssociationSet>
+    <AssociationSet Name="Wishlist" Association="Self.Wishlist">
+      <End Role="Courses" EntitySet="Courses" />
+      <End Role="Trainees" EntitySet="Trainees" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>
